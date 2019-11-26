@@ -1,0 +1,966 @@
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
+#define PIN 6
+
+// Parameter 1 = number of pixels in strip
+// Parameter 2 = Arduino pin number (most are valid)
+// Parameter 3 = pixel type flags, add together as needed:
+//   NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
+//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(5, 6, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(5, 7, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(5, 8, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip4 = Adafruit_NeoPixel(5, 9, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip5 = Adafruit_NeoPixel(5, 10, NEO_GRB + NEO_KHZ800);
+int A1array[] = {0,0,0,0,0,1,1,1,1,0,0,0,0,0,0};
+int A2array[] = {0,0,1,0,1};
+int A3array[] = {0,0,1,0,1};
+int A4array[] = {0,0,1,0,1};
+int A5array[] = {1,1,1,1,0};
+int x;
+int i;
+int j;
+int Red;
+int Green;
+int Blue;
+int NewRed;
+int NewBlue;
+int NewGreen;
+// IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
+// pixel power leads, add 300 - 2550 Ohm resistor on first pixel's data input
+// and minimize distance between Arduino and first pixel.  Avoid connecting
+// on a live circuit...if you must, connect GND first.
+
+
+void setup() {
+  Serial.begin(9600);
+  // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
+  #if defined (__AVR_ATtiny85__)
+    if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
+  #endif
+  // End of trinket special code
+  
+
+//Serial.begin(9600);
+
+  strip1.begin();
+  strip2.begin();
+  strip3.begin();
+  strip4.begin();
+  strip5.begin();
+  Update();
+// Initialize all pixels to 'off'
+}
+
+void loop() {
+ // for (x=10; x>0; x--){
+Clear();
+Aonup();
+AtoWhite();
+Aupoff();
+Vonup();
+VtoWhite();
+Voffup();
+Eonup();
+EtoWhite();
+Eoffup();
+Ronup();
+RtoWhite();
+Roffup();
+Yonup();
+YtoWhite();
+Yoffup();
+Update();
+ //end of loop
+}
+
+void Clear(){
+strip1.clear();
+strip2.clear();
+strip3.clear();
+strip4.clear();
+strip5.clear();
+}
+
+void Update(){
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(300);
+}
+
+void Aonup(){
+randomColor();
+Clear();
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+//AtoWhite();
+}
+
+void Aupoff(){
+//randomColor();
+//Clear();
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+Update();
+Clear();
+}
+void randomColor(){
+j = random(1,4);
+   switch (j) {
+    case 1:   
+Red = random(0,75);
+Green = random(100,250);
+Blue = random(0,75);
+      break;
+    case 2:   
+Green = random(0,75);
+Red = random(100,250);
+Blue = random(0,75);   
+      break;
+    case 3:   
+Green = random(0,75);
+Blue = random(100,250);
+Red = random(0,75);     
+      break;
+   }
+}
+void AtoWhite(){
+  while((Red<255) or (Blue<255) or (Green<255)){
+  if(Red<255){
+    Red = Red + 1;
+  }
+  if (Green<255){
+  Green = Green +1;
+  }
+  if (Blue<255){
+  Blue = Blue + 1;
+  }
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+  }
+  
+NewRed = 255;
+NewGreen = 255;
+NewBlue = 255;
+randomColor();
+  while((NewRed>Red) or (NewBlue>Blue) or (NewGreen>Green)){
+  if (NewRed>Red){
+  NewRed = NewRed - 1;}
+if (NewGreen>Green){
+  NewGreen = NewGreen - 1;
+}
+if (NewBlue>Blue){
+  NewBlue = NewBlue - 1;
+}
+strip2.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(0, NewRed, NewBlue, NewGreen);
+
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+}
+Red = NewRed;
+Green = NewGreen;
+Blue = NewBlue;
+}
+
+void Vonup()
+{
+randomColor();
+Clear();
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+}
+
+void Voffup(){
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+Update();
+Clear();
+strip2.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+Update();
+Clear();
+strip3.setPixelColor(4, Red, Blue, Green);
+Update();
+Clear();
+}
+
+void VtoWhite(){
+  while((Red<255) or (Blue<255) or (Green<255)){
+  if(Red<255){
+    Red = Red + 1;
+  }
+  if (Green<255){
+  Green = Green +1;
+  }
+  if (Blue<255){
+  Blue = Blue + 1;
+  }
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+  }
+NewRed = 255;
+NewGreen = 255;
+NewBlue = 255;
+randomColor();
+  while((NewRed>Red) or (NewBlue>Blue) or (NewGreen>Green)){
+  if (NewRed>Red){
+  NewRed = NewRed - 1;}
+if (NewGreen>Green){
+  NewGreen = NewGreen - 1;
+}
+if (NewBlue>Blue){
+  NewBlue = NewBlue - 1;
+}
+strip1.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+}
+Red = NewRed;
+Green = NewGreen;
+Blue = NewBlue;
+}
+
+void Eonup()
+{
+randomColor();
+Clear();
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+}
+void EtoWhite(){
+  while((Red<255) or (Blue<255) or (Green<255)){
+  if(Red<255){
+    Red = Red + 1;
+  }
+  if (Green<255){
+  Green = Green +1;
+  }
+  if (Blue<255){
+  Blue = Blue + 1;
+  }
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+  }
+NewRed = 255;
+NewGreen = 255;
+NewBlue = 255;
+randomColor();
+  while((NewRed>Red) or (NewBlue>Blue) or (NewGreen>Green)){
+  if (NewRed>Red){
+  NewRed = NewRed - 1;}
+if (NewGreen>Green){
+  NewGreen = NewGreen - 1;
+}
+if (NewBlue>Blue){
+  NewBlue = NewBlue - 1;
+}
+strip1.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+}
+Red = NewRed;
+Green = NewGreen;
+Blue = NewBlue;
+}
+
+void Eoffup(){
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+Update();
+Clear();
+}
+
+void Ronup()
+{
+randomColor();
+Clear();
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+}
+void RtoWhite(){
+  while((Red<255) or (Blue<255) or (Green<255)){
+  if(Red<255){
+    Red = Red + 1;
+  }
+  if (Green<255){
+  Green = Green +1;
+  }
+  if (Blue<255){
+  Blue = Blue + 1;
+  }
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+  }
+NewRed = 255;
+NewGreen = 255;
+NewBlue = 255;
+randomColor();
+  while((NewRed>Red) or (NewBlue>Blue) or (NewGreen>Green)){
+  if (NewRed>Red){
+  NewRed = NewRed - 1;}
+if (NewGreen>Green){
+  NewGreen = NewGreen - 1;
+}
+if (NewBlue>Blue){
+  NewBlue = NewBlue - 1;
+}
+strip1.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip1.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(0, NewRed, NewBlue, NewGreen);
+
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+}
+Red = NewRed;
+Green = NewGreen;
+Blue = NewBlue;
+}
+void Roffup(){
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);  
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);  
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);  
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);  
+Update();
+Clear();
+}
+void Yonup()
+{
+randomColor();
+Clear();
+strip1.setPixelColor(0, Red, Blue, Green);
+strip5.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(1, Red, Blue, Green);
+strip5.setPixelColor(1, Red, Blue, Green);
+strip2.setPixelColor(0, Red, Blue, Green);
+strip4.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(2, Red, Blue, Green);
+strip5.setPixelColor(2, Red, Blue, Green);
+strip2.setPixelColor(1, Red, Blue, Green);
+strip4.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(3, Red, Blue, Green);
+strip5.setPixelColor(3, Red, Blue, Green);
+strip2.setPixelColor(2, Red, Blue, Green);
+strip4.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+}
+void YtoWhite(){
+  while((Red<255) or (Blue<255) or (Green<255)){
+  if(Red<255){
+    Red = Red + 1;
+  }
+  if (Green<255){
+  Green = Green +1;
+  }
+  if (Blue<255){
+  Blue = Blue + 1;
+  }
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+  }
+NewRed = 255;
+NewGreen = 255;
+NewBlue = 255;
+randomColor();
+  while((NewRed>Red) or (NewBlue>Blue) or (NewGreen>Green)){
+  if (NewRed>Red){
+  NewRed = NewRed - 1;}
+if (NewGreen>Green){
+  NewGreen = NewGreen - 1;
+}
+if (NewBlue>Blue){
+  NewBlue = NewBlue - 1;
+}
+strip1.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip5.setPixelColor(4, NewRed, NewBlue, NewGreen);
+strip2.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip4.setPixelColor(3, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(2, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(1, NewRed, NewBlue, NewGreen);
+strip3.setPixelColor(0, NewRed, NewBlue, NewGreen);
+strip1.show();
+strip2.show();
+strip3.show();
+strip4.show();
+strip5.show();
+delay(5);
+}
+Red = NewRed;
+Green = NewGreen;
+Blue = NewBlue;
+}
+void Yoffup(){
+strip1.setPixelColor(4, Red, Blue, Green);
+strip5.setPixelColor(4, Red, Blue, Green);
+strip2.setPixelColor(3, Red, Blue, Green);
+strip4.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+strip3.setPixelColor(0, Red, Blue, Green);
+Update();
+Clear();
+strip2.setPixelColor(4, Red, Blue, Green);
+strip4.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+strip3.setPixelColor(1, Red, Blue, Green);
+Update();
+Clear();
+strip3.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+strip3.setPixelColor(2, Red, Blue, Green);
+Update();
+Clear();
+strip3.setPixelColor(4, Red, Blue, Green);
+strip3.setPixelColor(3, Red, Blue, Green);
+Update();
+Clear();
+strip3.setPixelColor(4, Red, Blue, Green);
+Update();
+Clear();
+}
